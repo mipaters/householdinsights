@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Rogers Household Insights Agent executive demonstration"
+    />
+    <title>Rogers Household Insights Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div>
+          <strong>ROGERS</strong>
+          <small>HOUSEHOLD INSIGHTS</small>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-icon" data-icon="grid"></span>
+          <span>Executive Dashboard</span>
+        </button>
+        <button class="nav-item" data-page="graph">
+          <span class="nav-icon" data-icon="nodes"></span>
+          <span>Household Graph</span>
+        </button>
+        <button class="nav-item" data-page="intelligence">
+          <span class="nav-icon" data-icon="brain"></span>
+          <span>Intelligence Center</span>
+        </button>
+        <div class="nav-label">AGENT WORKSPACE</div>
+        <button class="nav-item" data-page="opportunities">
+          <span class="nav-icon" data-icon="spark"></span>
+          <span>Opportunity Discovery</span>
+          <b class="nav-count">12</b>
+        </button>
+        <button class="nav-item" data-page="churn">
+          <span class="nav-icon" data-icon="shield"></span>
+          <span>Churn Prevention</span>
+          <b class="nav-count warning">3</b>
+        </button>
+        <button class="nav-item" data-page="experiences">
+          <span class="nav-icon" data-icon="target"></span>
+          <span>Next Best Experience</span>
+        </button>
+        <button class="nav-item" data-page="orchestration">
+          <span class="nav-icon" data-icon="activity"></span>
+          <span>Live Orchestration</span>
+          <i class="live-dot"></i>
+        </button>
+        <div class="nav-label">PLATFORM</div>
+        <button class="nav-item" data-page="architecture">
+          <span class="nav-icon" data-icon="layers"></span>
+          <span>Architecture</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="agent-status">
+          <span class="agent-orbit"><i></i></span>
+          <div>
+            <strong>5 agents active</strong>
+            <small>Last sync 12 sec ago</small>
+          </div>
+        </div>
+        <div class="demo-label">EXECUTIVE DEMO</div>
+      </div>
+    </aside>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-button" id="menuButton" aria-label="Open navigation">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="context-title">
+            <span class="eyebrow">HOUSEHOLD INTELLIGENCE PLATFORM</span>
+            <h1 id="pageTitle">Executive Dashboard</h1>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <div class="time-filter">
+            <button class="active">Q3 2026</button>
+            <button>YTD</button>
+          </div>
+          <button class="icon-button" aria-label="Notifications">
+            <span data-icon="bell"></span><i></i>
+          </button>
+          <div class="avatar">JD</div>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <section class="page active" id="dashboardPage"></section>
+        <section class="page" id="graphPage"></section>
+        <section class="page" id="intelligencePage"></section>
+        <section class="page" id="opportunitiesPage"></section>
+        <section class="page" id="churnPage"></section>
+        <section class="page" id="experiencesPage"></section>
+        <section class="page" id="orchestrationPage"></section>
+        <section class="page" id="architecturePage"></section>
+      </div>
+    </main>
+
+    <div class="toast" id="toast">
+      <span data-icon="check"></span>
+      <div><strong id="toastTitle">Action complete</strong><small id="toastText"></small></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
