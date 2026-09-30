@@ -25,6 +25,7 @@ const icons = {
   search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>',
   monitor: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>',
   link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.2 1.2M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.2-1.2"/></svg>',
+  play: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4V8Z"/></svg>',
 };
 
 const households = {
@@ -397,8 +398,100 @@ function renderArchitecture() {
     <div class="outcome-strip"><div class="outcomes">${[["+15%", "Cross-Sell Conversion"], ["+12%", "Household ARPU"], ["−20%", "Household Churn"], ["+18%", "Sports Revenue"], ["+22%", "Offer Acceptance"]].map(([v,l]) => `<div class="outcome"><strong>${v}</strong><span>${l}</span><small>ILLUSTRATIVE DEMO METRIC</small></div>`).join("")}</div></div>`;
 }
 
+const walkthroughs = [
+  {
+    number: "01",
+    title: "Household Growth Discovery",
+    household: "The Thompson Family",
+    summary: "Connect fragmented identities, reveal hidden value and activate a personalized growth offer.",
+    outcome: "+$1,019 annual revenue",
+    color: "#e51b23",
+    steps: [
+      { label: "Resolve", icon: "link", title: "Discover the hidden household relationship", copy: "The Identity Agent connects Sarah Thompson's Rogers Mastercard to the wireless household using a shared address, payment patterns and consented profile signals.", metric: "96%", metricLabel: "IDENTITY CONFIDENCE", target: "graph", action: "OPEN HOUSEHOLD GRAPH" },
+      { label: "Understand", icon: "brain", title: "Build a complete household value profile", copy: "The Insights Agent combines four members, three wireless lines, Ignite Internet, sports engagement and financial products into one continuously updated household view.", metric: "$24.8K", metricLabel: "PREDICTED LIFETIME VALUE", target: "intelligence", action: "OPEN INTELLIGENCE CENTER" },
+      { label: "Grow", icon: "spark", title: "Identify the next growth opportunity", copy: "Weekly Blue Jays viewing and strong post-game engagement reveal high propensity for Sportsnet Premium and a family roaming package.", metric: "$1,019", metricLabel: "ANNUAL REVENUE POTENTIAL", target: "opportunities", action: "REVIEW OPPORTUNITIES" },
+      { label: "Activate", icon: "target", title: "Generate the next best household offer", copy: "The Experience Agent composes a coordinated sports and connectivity offer personalized across all four household members and their preferred channels.", metric: "72%", metricLabel: "PREDICTED ACCEPTANCE", target: "experiences", action: "VIEW GENERATED OFFER" },
+    ],
+  },
+  {
+    number: "02",
+    title: "Sports & Entertainment Expansion",
+    household: "The Garcia Family",
+    summary: "Turn digital sports engagement into a high-confidence cross-sell and membership journey.",
+    outcome: "74% conversion propensity",
+    color: "#6898ff",
+    steps: [
+      { label: "Detect", icon: "activity", title: "Detect strong Blue Jays engagement", copy: "The Insights Agent observes frequent Blue Jays content consumption, repeat game-day activity and ticket browsing across both household members.", metric: "94%", metricLabel: "SPORTS AFFINITY", target: "intelligence", action: "VIEW ENGAGEMENT SIGNALS" },
+      { label: "Predict", icon: "brain", title: "Model household purchase intent", copy: "Cross-channel behavior indicates the household is actively evaluating premium sports access but has not yet converted to a Rogers sports product.", metric: "8", metricLabel: "HIGH-INTENT JOURNEYS", target: "intelligence", action: "OPEN INTELLIGENCE CENTER" },
+      { label: "Recommend", icon: "ticket", title: "Recommend a coordinated sports bundle", copy: "The Opportunity Agent pairs Sportsnet Premium with a Blue Jays ticket package, optimizing for value, relevance and likely household adoption.", metric: "$1,340", metricLabel: "ANNUAL REVENUE POTENTIAL", target: "opportunities", action: "REVIEW RECOMMENDATION" },
+      { label: "Convert", icon: "target", title: "Launch a personalized conversion journey", copy: "The Experience Agent selects the best message, channel and timing for Carlos and Elena, while suppressing irrelevant telecom offers.", metric: "74%", metricLabel: "CROSS-SELL PROPENSITY", target: "experiences", action: "PREVIEW EXPERIENCE" },
+    ],
+  },
+  {
+    number: "03",
+    title: "Household Churn Prevention",
+    household: "At-Risk Household",
+    summary: "Detect risk spreading between members and coordinate a household-level retention response.",
+    outcome: "$9,840 lifetime value saved",
+    color: "#f5ad48",
+    steps: [
+      { label: "Listen", icon: "activity", title: "Detect a negative member experience", copy: "The Retention Agent detects repeated service-quality contacts, declining usage and negative sentiment from one household member within a 14-day window.", metric: "3", metricLabel: "SERVICE CONTACTS", target: "churn", action: "VIEW RISK SIGNALS" },
+      { label: "Assess", icon: "shield", title: "Predict household-level risk propagation", copy: "The model recognizes that the affected member influences the household's internet and wireless decisions, raising the risk across all connected services.", metric: "88", metricLabel: "HOUSEHOLD RISK SCORE", target: "churn", action: "OPEN RISK ANALYSIS" },
+      { label: "Plan", icon: "brain", title: "Build a coordinated retention plan", copy: "The agent recommends service recovery, a proactive bill review and a targeted connectivity credit sequenced across the primary decision-makers.", metric: "4", metricLabel: "RECOMMENDED ACTIONS", target: "churn", action: "REVIEW SAVE PLAN" },
+      { label: "Protect", icon: "dollar", title: "Protect household lifetime value", copy: "The next best retention experience is routed for human approval, with projected save probability and financial impact clearly quantified.", metric: "$9,840", metricLabel: "LIFETIME VALUE PROTECTED", target: "orchestration", action: "WATCH AGENT ORCHESTRATION" },
+    ],
+  },
+];
+
+let activeWalkthrough = 0;
+let activeWalkthroughStep = 0;
+
+function renderWalkthrough() {
+  const scenario = walkthroughs[activeWalkthrough];
+  const step = scenario.steps[activeWalkthroughStep];
+  document.getElementById("walkthroughPage").innerHTML = `
+    ${pageIntro("Executive Walkthrough", "A guided, presentation-ready story showing how household intelligence moves from identity discovery to measurable growth and retention outcomes.")}
+    <div class="walkthrough-scenarios">
+      ${walkthroughs.map((item, index) => `
+        <button class="walkthrough-scenario ${index === activeWalkthrough ? "active" : ""}" data-walkthrough-scenario="${index}" style="--scenario-color:${item.color}">
+          <span class="scenario-number">${item.number}</span>
+          <span class="scenario-copy"><strong>${item.title}</strong><small>${item.household}</small></span>
+          <span class="scenario-outcome">${item.outcome}</span>
+        </button>`).join("")}
+    </div>
+    <div class="panel walkthrough-stage" style="--scenario-color:${scenario.color}">
+      <div class="walkthrough-stage-header">
+        <div><span class="walkthrough-kicker">SCENARIO ${scenario.number} · ${scenario.household.toUpperCase()}</span><h2>${scenario.title}</h2><p>${scenario.summary}</p></div>
+        <div class="walkthrough-counter"><strong>${String(activeWalkthroughStep + 1).padStart(2, "0")}</strong><span>/ 04</span></div>
+      </div>
+      <div class="walkthrough-progress">
+        ${scenario.steps.map((item, index) => `<button class="${index === activeWalkthroughStep ? "active" : ""} ${index < activeWalkthroughStep ? "complete" : ""}" data-walkthrough-step="${index}"><i>${index < activeWalkthroughStep ? icon("check") : index + 1}</i><span>${item.label}</span></button>`).join("")}
+      </div>
+      <div class="walkthrough-content">
+        <div class="walkthrough-story">
+          <span class="story-icon">${icon(step.icon)}</span>
+          <div><span class="story-label">STEP ${activeWalkthroughStep + 1} · ${step.label.toUpperCase()}</span><h3>${step.title}</h3><p>${step.copy}</p></div>
+        </div>
+        <div class="walkthrough-impact">
+          <span>EXECUTIVE PROOF POINT</span><strong>${step.metric}</strong><small>${step.metricLabel}</small>
+        </div>
+      </div>
+      <div class="walkthrough-footer">
+        <button class="ghost-button" data-walkthrough-prev ${activeWalkthroughStep === 0 ? "disabled" : ""}>← PREVIOUS STEP</button>
+        <button class="ghost-button walkthrough-live-link" data-navigate="${step.target}">${step.action} ↗</button>
+        <button class="primary-button" data-walkthrough-next>${activeWalkthroughStep === scenario.steps.length - 1 ? (activeWalkthrough === walkthroughs.length - 1 ? "RESTART WALKTHROUGH" : "NEXT SCENARIO") : "NEXT STEP"} →</button>
+      </div>
+    </div>
+    <div class="walkthrough-takeaways">
+      <div><span>${icon("link")}</span><strong>One household identity</strong><small>Unify fragmented customer and partner relationships.</small></div>
+      <div><span>${icon("brain")}</span><strong>Continuous intelligence</strong><small>Understand behavior, value, intent and risk in real time.</small></div>
+      <div><span>${icon("spark")}</span><strong>Measurable growth</strong><small>Turn insight into personalized revenue and retention actions.</small></div>
+    </div>`;
+}
+
 const pageTitles = {
   dashboard: "Executive Dashboard",
+  walkthrough: "Executive Walkthrough",
   graph: "Household Graph Explorer",
   intelligence: "Household Intelligence Center",
   opportunities: "Opportunity Discovery Agent",
@@ -441,6 +534,42 @@ function bindEvents() {
         details: ["Signals expanded", "Agent evidence and contributing signals are now available."],
       };
       showToast(...actions[action.dataset.action]);
+    }
+
+    const scenarioButton = event.target.closest("[data-walkthrough-scenario]");
+    if (scenarioButton) {
+      activeWalkthrough = Number(scenarioButton.dataset.walkthroughScenario);
+      activeWalkthroughStep = 0;
+      renderWalkthrough();
+      renderAllIcons();
+    }
+
+    const stepButton = event.target.closest("[data-walkthrough-step]");
+    if (stepButton) {
+      activeWalkthroughStep = Number(stepButton.dataset.walkthroughStep);
+      renderWalkthrough();
+      renderAllIcons();
+    }
+
+    if (event.target.closest("[data-walkthrough-prev]") && activeWalkthroughStep > 0) {
+      activeWalkthroughStep -= 1;
+      renderWalkthrough();
+      renderAllIcons();
+    }
+
+    if (event.target.closest("[data-walkthrough-next]")) {
+      if (activeWalkthroughStep < walkthroughs[activeWalkthrough].steps.length - 1) {
+        activeWalkthroughStep += 1;
+      } else if (activeWalkthrough < walkthroughs.length - 1) {
+        activeWalkthrough += 1;
+        activeWalkthroughStep = 0;
+      } else {
+        activeWalkthrough = 0;
+        activeWalkthroughStep = 0;
+        showToast("Walkthrough complete", "All three executive scenarios are ready to present again.");
+      }
+      renderWalkthrough();
+      renderAllIcons();
     }
 
     const node = event.target.closest(".node");
@@ -512,6 +641,7 @@ function startLiveFeed() {
 
 function init() {
   renderDashboard();
+  renderWalkthrough();
   renderGraph();
   renderIntelligence();
   renderOpportunities();

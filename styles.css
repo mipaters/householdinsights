@@ -1703,6 +1703,360 @@ button {
   font-size: 7px;
 }
 
+.walkthrough-scenarios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.walkthrough-scenario {
+  position: relative;
+  min-height: 88px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(23, 25, 31, 0.92), rgba(14, 16, 20, 0.92));
+  color: var(--muted-2);
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 180ms ease;
+}
+
+.walkthrough-scenario::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  right: -35px;
+  top: -35px;
+  border-radius: 50%;
+  background: var(--scenario-color);
+  filter: blur(38px);
+  opacity: 0;
+  transition: 180ms ease;
+}
+
+.walkthrough-scenario:hover,
+.walkthrough-scenario.active {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--scenario-color) 45%, transparent);
+}
+
+.walkthrough-scenario.active::after {
+  opacity: 0.22;
+}
+
+.scenario-number {
+  color: var(--scenario-color);
+  font: 700 11px "Manrope", sans-serif;
+}
+
+.scenario-copy strong,
+.scenario-copy small {
+  display: block;
+}
+
+.scenario-copy strong {
+  color: white;
+  font: 700 11px/1.3 "Manrope", sans-serif;
+}
+
+.scenario-copy small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.scenario-outcome {
+  grid-column: 2;
+  color: var(--green);
+  font-size: 8px;
+}
+
+.walkthrough-stage {
+  position: relative;
+  min-height: 470px;
+  padding: 28px;
+  overflow: hidden;
+}
+
+.walkthrough-stage::before {
+  content: "";
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  right: -150px;
+  top: -170px;
+  border-radius: 50%;
+  background: var(--scenario-color);
+  filter: blur(110px);
+  opacity: 0.12;
+}
+
+.walkthrough-stage-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.walkthrough-kicker {
+  color: var(--scenario-color);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.walkthrough-stage-header h2 {
+  margin: 8px 0 7px;
+  font: 700 22px "Manrope", sans-serif;
+}
+
+.walkthrough-stage-header p {
+  max-width: 650px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.walkthrough-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.walkthrough-counter strong {
+  color: var(--scenario-color);
+  font: 700 30px "Manrope", sans-serif;
+}
+
+.walkthrough-counter span {
+  color: #565a63;
+  font-size: 11px;
+}
+
+.walkthrough-progress {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 34px 0 32px;
+}
+
+.walkthrough-progress::before {
+  content: "";
+  position: absolute;
+  left: 12.5%;
+  right: 12.5%;
+  top: 14px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.walkthrough-progress button {
+  position: relative;
+  z-index: 1;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.walkthrough-progress i {
+  width: 29px;
+  height: 29px;
+  margin: 0 auto 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: #17191f;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 9px;
+  font-style: normal;
+}
+
+.walkthrough-progress i svg {
+  width: 12px;
+  height: 12px;
+}
+
+.walkthrough-progress button.active i {
+  border-color: var(--scenario-color);
+  background: color-mix(in srgb, var(--scenario-color) 17%, #17191f);
+  color: white;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--scenario-color) 9%, transparent);
+}
+
+.walkthrough-progress button.complete i {
+  border-color: rgba(69, 210, 157, 0.35);
+  background: rgba(69, 210, 157, 0.1);
+  color: var(--green);
+}
+
+.walkthrough-progress button span {
+  font-size: 8px;
+  letter-spacing: 0.06em;
+}
+
+.walkthrough-progress button.active span {
+  color: white;
+}
+
+.walkthrough-content {
+  display: grid;
+  grid-template-columns: 1fr 210px;
+  gap: 30px;
+  align-items: center;
+  min-height: 150px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.018);
+  animation: pageIn 350ms ease both;
+}
+
+.walkthrough-story {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.story-icon {
+  width: 50px;
+  height: 50px;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--scenario-color) 12%, transparent);
+  color: var(--scenario-color);
+  display: grid;
+  place-items: center;
+}
+
+.story-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.story-label {
+  color: var(--scenario-color);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.walkthrough-story h3 {
+  margin: 7px 0 8px;
+  font: 700 17px/1.3 "Manrope", sans-serif;
+}
+
+.walkthrough-story p {
+  max-width: 650px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.walkthrough-impact {
+  padding: 20px;
+  border-left: 1px solid var(--line);
+  text-align: center;
+}
+
+.walkthrough-impact span,
+.walkthrough-impact strong,
+.walkthrough-impact small {
+  display: block;
+}
+
+.walkthrough-impact span {
+  color: var(--muted);
+  font-size: 7px;
+  letter-spacing: 0.12em;
+}
+
+.walkthrough-impact strong {
+  margin: 9px 0 5px;
+  color: var(--scenario-color);
+  font: 700 25px "Manrope", sans-serif;
+}
+
+.walkthrough-impact small {
+  color: var(--muted-2);
+  font-size: 7px;
+}
+
+.walkthrough-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.walkthrough-footer button:first-child {
+  justify-self: start;
+}
+
+.walkthrough-footer button:last-child {
+  justify-self: end;
+}
+
+.walkthrough-footer button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.walkthrough-live-link {
+  border-color: color-mix(in srgb, var(--scenario-color) 40%, transparent);
+  color: white;
+}
+
+.walkthrough-takeaways {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.walkthrough-takeaways > div {
+  padding: 17px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.018);
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 3px 11px;
+  align-items: center;
+}
+
+.walkthrough-takeaways span {
+  grid-row: span 2;
+  width: 30px;
+  height: 30px;
+  color: var(--red-light);
+}
+
+.walkthrough-takeaways span svg {
+  width: 100%;
+  height: 100%;
+}
+
+.walkthrough-takeaways strong {
+  font-size: 9px;
+}
+
+.walkthrough-takeaways small {
+  color: var(--muted);
+  font-size: 8px;
+}
+
 .toast {
   position: fixed;
   right: 25px;
@@ -1807,6 +2161,10 @@ button {
   .architecture-flow::before {
     display: none;
   }
+
+  .walkthrough-content {
+    grid-template-columns: 1fr 175px;
+  }
 }
 
 @media (max-width: 980px) {
@@ -1826,6 +2184,11 @@ button {
   .service-grid,
   .outcomes {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .walkthrough-scenarios,
+  .walkthrough-takeaways {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1911,6 +2274,35 @@ button {
   .outcomes,
   .service-grid {
     grid-template-columns: 1fr;
+  }
+
+  .walkthrough-stage {
+    padding: 20px;
+  }
+
+  .walkthrough-stage-header,
+  .walkthrough-story {
+    flex-direction: column;
+  }
+
+  .walkthrough-content {
+    grid-template-columns: 1fr;
+  }
+
+  .walkthrough-impact {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .walkthrough-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .walkthrough-footer button,
+  .walkthrough-footer button:first-child,
+  .walkthrough-footer button:last-child {
+    width: 100%;
+    justify-self: stretch;
   }
 
   .feed-item {

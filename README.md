@@ -2,6 +2,8 @@
 
 An executive-grade, interactive demonstration of how Rogers can unify customer identities into a household-level view and use AI agents to discover growth opportunities, predict churn, and recommend personalized experiences.
 
+The demo includes a presentation-ready executive walkthrough covering household growth discovery, sports and entertainment expansion, and household-level churn prevention.
+
 ## Run locally
 
 Open `index.html` directly in a browser, or serve the folder with any static web server:
