@@ -449,8 +449,8 @@ let activeWalkthroughStep = 0;
 function renderWalkthrough() {
   const scenario = walkthroughs[activeWalkthrough];
   const step = scenario.steps[activeWalkthroughStep];
-  document.getElementById("walkthroughPage").innerHTML = `
-    ${pageIntro("Executive Walkthrough", "A guided, presentation-ready story showing how household intelligence moves from identity discovery to measurable growth and retention outcomes.")}
+  document.getElementById("walkthroughModalBody").innerHTML = `
+    <div class="walkthrough-intro"><p>A guided, presentation-ready story showing how household intelligence moves from identity discovery to measurable growth and retention outcomes.</p></div>
     <div class="walkthrough-scenarios">
       ${walkthroughs.map((item, index) => `
         <button class="walkthrough-scenario ${index === activeWalkthrough ? "active" : ""}" data-walkthrough-scenario="${index}" style="--scenario-color:${item.color}">
@@ -491,7 +491,6 @@ function renderWalkthrough() {
 
 const pageTitles = {
   dashboard: "Executive Dashboard",
-  walkthrough: "Executive Walkthrough",
   graph: "Household Graph Explorer",
   intelligence: "Household Intelligence Center",
   opportunities: "Opportunity Discovery Agent",
@@ -502,12 +501,32 @@ const pageTitles = {
 };
 
 function navigate(page) {
+  closeWalkthrough();
   document.querySelectorAll(".page").forEach((item) => item.classList.remove("active"));
   document.querySelectorAll(".nav-item").forEach((item) => item.classList.toggle("active", item.dataset.page === page));
   document.getElementById(`${page}Page`).classList.add("active");
   document.getElementById("pageTitle").textContent = pageTitles[page];
   document.getElementById("sidebar").classList.remove("open");
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function openWalkthrough() {
+  activeWalkthrough = 0;
+  activeWalkthroughStep = 0;
+  renderWalkthrough();
+  renderAllIcons();
+  const modal = document.getElementById("walkthroughModal");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("walkthrough-open");
+}
+
+function closeWalkthrough() {
+  const modal = document.getElementById("walkthroughModal");
+  if (!modal) return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("walkthrough-open");
 }
 
 let toastTimeout;
@@ -522,6 +541,16 @@ function showToast(title, text) {
 
 function bindEvents() {
   document.addEventListener("click", (event) => {
+    if (event.target.closest("[data-open-walkthrough]")) {
+      openWalkthrough();
+      return;
+    }
+
+    if (event.target.closest("[data-close-walkthrough]")) {
+      closeWalkthrough();
+      return;
+    }
+
     const nav = event.target.closest("[data-page], [data-navigate]");
     if (nav) navigate(nav.dataset.page || nav.dataset.navigate);
 
@@ -597,6 +626,9 @@ function bindEvents() {
   });
 
   document.getElementById("menuButton").addEventListener("click", () => document.getElementById("sidebar").classList.toggle("open"));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeWalkthrough();
+  });
   document.querySelectorAll(".time-filter button").forEach(button => button.addEventListener("click", () => {
     document.querySelectorAll(".time-filter button").forEach(item => item.classList.remove("active"));
     button.classList.add("active");

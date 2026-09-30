@@ -36,10 +36,6 @@
           <span class="nav-icon" data-icon="grid"></span>
           <span>Executive Dashboard</span>
         </button>
-        <button class="nav-item" data-page="walkthrough">
-          <span class="nav-icon" data-icon="play"></span>
-          <span>Executive Walkthrough</span>
-        </button>
         <button class="nav-item" data-page="graph">
           <span class="nav-icon" data-icon="nodes"></span>
           <span>Household Graph</span>
@@ -99,6 +95,10 @@
           </div>
         </div>
         <div class="topbar-actions">
+          <button class="walkthrough-launch" data-open-walkthrough aria-label="Open executive walkthrough">
+            <span data-icon="play"></span>
+            <span>Executive Walkthrough</span>
+          </button>
           <div class="time-filter">
             <button class="active">Q3 2026</button>
             <button>YTD</button>
@@ -112,7 +112,6 @@
 
       <div class="page-container">
         <section class="page active" id="dashboardPage"></section>
-        <section class="page" id="walkthroughPage"></section>
         <section class="page" id="graphPage"></section>
         <section class="page" id="intelligencePage"></section>
         <section class="page" id="opportunitiesPage"></section>
@@ -122,6 +121,20 @@
         <section class="page" id="architecturePage"></section>
       </div>
     </main>
+
+    <div class="walkthrough-modal" id="walkthroughModal" aria-hidden="true">
+      <button class="walkthrough-backdrop" data-close-walkthrough aria-label="Close walkthrough"></button>
+      <div class="walkthrough-dialog" role="dialog" aria-modal="true" aria-labelledby="walkthroughTitle">
+        <div class="walkthrough-modal-header">
+          <div>
+            <span>ROGERS HOUSEHOLD INSIGHTS</span>
+            <h2 id="walkthroughTitle">Executive Walkthrough</h2>
+          </div>
+          <button class="walkthrough-close" data-close-walkthrough aria-label="Close executive walkthrough">×</button>
+        </div>
+        <div class="walkthrough-modal-body" id="walkthroughModalBody"></div>
+      </div>
+    </div>
 
     <div class="toast" id="toast">
       <span data-icon="check"></span>
